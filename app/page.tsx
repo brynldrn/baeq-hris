@@ -1,10 +1,6 @@
-import { auth } from "@/auth";
-import { getSession } from "next-auth/react";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 const Home = async () => {
-  const session = await auth()
-
-  if (!session) { return }
 
   return (
     <main className='w-full h-full flex items-center justify-center'>
@@ -29,4 +25,4 @@ const Home = async () => {
   );
 }
 
-export default Home
+export default withPageAuthRequired(Home)
