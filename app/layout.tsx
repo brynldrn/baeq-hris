@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "HRIS by 3.28",
@@ -22,10 +23,14 @@ export default function RootLayout({
   return (
     <html lang='en' data-theme='dark'>
       <UserProvider>
-        <body className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}>{children}</body>
+        <ThemeProvider attribute='class' defaultTheme='system'>
+          <body className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable
+          )}>
+            {children}
+          </body>
+        </ThemeProvider>
       </UserProvider>
     </html>
   );
